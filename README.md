@@ -1,117 +1,45 @@
-local DiscordLib =loadstring(game:HttpGet "https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/discord")()
-
-local win = DiscordLib:Window("discord library")
-
-local serv = win:Server("Preview", "")
-
-local btns = serv:Channel("Buttons")
-
-btns:Button(
-    "Kill all",
-    function()
-        DiscordLib:Notification("Notification", "Killed everyone!", "Okay!")
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Life Hub", "Sentinel")
+local Tab = Window:NewTab("TabName")
+local Section = Tab:NewSection("Section Name")
+Section:NewLabel("LabelText")
+Section:NewButton("ButtonText", "ButtonInfo", function()
+    print("Clicked")
+end)
+Section:NewToggle("ToggleText", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
     end
-)
+end)
+Section:NewSlider("SliderText", "SliderInfo", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+Section:NewTextBox("TextboxText", "TextboxInfo", function(txt)
+	print(txt)
+end)
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()
+	print("You just clicked the bind")
+end)
+Section:NewDropdown("DropdownText", "DropdownInf", {"Option 1", "Option 2", "Option 3"}, function(currentOption)
+    print(currentOption)
+end)
+local oldList = {
+  "2019",
+  "2020"
+}
+local newList = {
+  "2021",
+  "2022"
+}
+local dropdown = Section:NewDropdown("Dropdown","Info", oldList, function()
 
-btns:Seperator()
-
-btns:Button(
-    "Get max level",
-    function()
-        DiscordLib:Notification("Notification", "Max level!", "Okay!")
-    end
-)
-
-local tgls = serv:Channel("Toggles")
-
-tgls:Toggle(
-    "Auto-Farm",
-    false,
-    function(bool)
-        print(bool)
-    end
-)
-
-local sldrs = serv:Channel("Sliders")
-
-local sldr =
-    sldrs:Slider(
-    "Slide me!",
-    0,
-    1000,
-    400,
-    function(t)
-        print(t)
-    end
-)
-
-sldrs:Button(
-    "Change to 50",
-    function()
-        sldr:Change(50)
-    end
-)
-
-local drops = serv:Channel("Dropdowns")
-
-local drop =
-    drops:Dropdown(
-    "Pick me!",
-    {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5"},
-    function(bool)
-        print(bool)
-    end
-)
-
-drops:Button(
-    "Clear",
-    function()
-        drop:Clear()
-    end
-)
-
-drops:Button(
-    "Add option",
-    function()
-        drop:Add("Option")
-    end
-)
-
-local clrs = serv:Channel("Colorpickers")
-
-clrs:Colorpicker(
-    "ESP Color",
-    Color3.fromRGB(255, 1, 1),
-    function(t)
-        print(t)
-    end
-)
-
-local textbs = serv:Channel("Textboxes")
-
-textbs:Textbox(
-    "Gun power",
-    "Type here!",
-    true,
-    function(t)
-        print(t)
-    end
-)
-
-local lbls = serv:Channel("Labels")
-
-lbls:Label("This is just a label.")
-
-local bnds = serv:Channel("Binds")
-
-bnds:Bind(
-    "Kill bind",
-    Enum.KeyCode.RightShift,
-    function()
-        print("Killed everyone!")
-    end
-)
-
-serv:Channel("by dawid#7205")
-
-win:Server("Main", "http://www.roblox.com/asset/?id=6031075938")
+end)
+Section:NewButton("Update Dropdown", "Refreshes Dropdown", function()
+  dropdown:Refresh(newList)
+end)
+Section:NewColorPicker("Color Text", "Color Info", Color3.fromRGB(0,0,0), function(color)
+    print(color)
+    -- Second argument is the default color
+end)
