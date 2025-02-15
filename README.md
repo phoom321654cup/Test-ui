@@ -1,36 +1,117 @@
--- Library Core Loadstring
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/slf0Dev/Goat-poop/main/Windows%2010%20UI%20Library"))()
+local DiscordLib =loadstring(game:HttpGet "https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/discord")()
 
--- Creating Gui
-local MainWindow = Library.Main("GuiName","KeyBind")
+local win = DiscordLib:Window("discord library")
 
--- Creating Categories
-local Category = MainWindow.Category("Your Text","ImageId","ImageScaleType",Image Transparency)
+local serv = win:Server("Preview", "")
 
+local btns = serv:Channel("Buttons")
 
---[[
-ImageScaleTypes : "Crop" , "Fit" , "Slice" , "Stretch"
-]]
+btns:Button(
+    "Kill all",
+    function()
+        DiscordLib:Notification("Notification", "Killed everyone!", "Okay!")
+    end
+)
 
--- Creating Folders
-local Folder = Category.Folder("TemplateFolder")
+btns:Seperator()
 
--- Creating Components
+btns:Button(
+    "Get max level",
+    function()
+        DiscordLib:Notification("Notification", "Max level!", "Okay!")
+    end
+)
 
--- Creating Labels
-local Label = Folder.Label("Your Text")
+local tgls = serv:Channel("Toggles")
 
--- Creating Buttons
-local Button = Folder.Button("Your Text",function()
-print("Pressed")
-end)
+tgls:Toggle(
+    "Auto-Farm",
+    false,
+    function(bool)
+        print(bool)
+    end
+)
 
--- Creating Toggles
-local Toggle = Folder.Toggle("Your Text",function(bool)
-print(bool)
-end,DefaultBoolValue)
+local sldrs = serv:Channel("Sliders")
 
--- Creating Sliders
-local Slider = Folder.Slider("Your Text",min,max,function(value)
-print(value)
-end,DefaultValue,isFloat) --isFloat is boolean
+local sldr =
+    sldrs:Slider(
+    "Slide me!",
+    0,
+    1000,
+    400,
+    function(t)
+        print(t)
+    end
+)
+
+sldrs:Button(
+    "Change to 50",
+    function()
+        sldr:Change(50)
+    end
+)
+
+local drops = serv:Channel("Dropdowns")
+
+local drop =
+    drops:Dropdown(
+    "Pick me!",
+    {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5"},
+    function(bool)
+        print(bool)
+    end
+)
+
+drops:Button(
+    "Clear",
+    function()
+        drop:Clear()
+    end
+)
+
+drops:Button(
+    "Add option",
+    function()
+        drop:Add("Option")
+    end
+)
+
+local clrs = serv:Channel("Colorpickers")
+
+clrs:Colorpicker(
+    "ESP Color",
+    Color3.fromRGB(255, 1, 1),
+    function(t)
+        print(t)
+    end
+)
+
+local textbs = serv:Channel("Textboxes")
+
+textbs:Textbox(
+    "Gun power",
+    "Type here!",
+    true,
+    function(t)
+        print(t)
+    end
+)
+
+local lbls = serv:Channel("Labels")
+
+lbls:Label("This is just a label.")
+
+local bnds = serv:Channel("Binds")
+
+bnds:Bind(
+    "Kill bind",
+    Enum.KeyCode.RightShift,
+    function()
+        print("Killed everyone!")
+    end
+)
+
+serv:Channel("by dawid#7205")
+
+win:Server("Main", "http://www.roblox.com/asset/?id=6031075938")
